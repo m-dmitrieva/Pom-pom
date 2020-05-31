@@ -16,7 +16,7 @@ namespace Pom_Pom
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NameForm());
+            Application.Run(new MainForm());
         }
 
 

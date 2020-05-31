@@ -1,6 +1,6 @@
 ﻿namespace Pom_Pom
 {
-    partial class NameForm
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NameForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitForPannels = new System.Windows.Forms.SplitContainer();
             this.settingsButton = new System.Windows.Forms.Button();
             this.buttonsPanel = new System.Windows.Forms.Panel();
@@ -150,14 +150,14 @@
             this.pom_pomNotify.Text = "pom_pom";
             this.pom_pomNotify.Visible = true;
             // 
-            // NameForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 450);
             this.Controls.Add(this.splitForPannels);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "NameForm";
+            this.Name = "MainForm";
             this.Text = "Pom-Pom";
             this.Load += new System.EventHandler(this.NameForm_Load);
             this.splitForPannels.Panel1.ResumeLayout(false);

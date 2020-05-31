@@ -11,7 +11,7 @@ namespace Pom_Pom
         {
         }
 
-        public static void LoadFromConfig()
+        public static string LoadFromConfig()
         {
             string filePath = null;
 
@@ -44,12 +44,7 @@ namespace Pom_Pom
             {
                 Console.WriteLine("Something goes wrong. " + ex.Message);
             }
-
-            //try to load tree of jobs from file
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                TreeNode parsedFile = LoadProjectsFromFile(filePath);
-            }
+            return filePath;
         }
         
         /**
@@ -58,18 +53,45 @@ namespace Pom_Pom
          * */
         public static TreeNode LoadProjectsFromFile(string filePath)
         {
-            TreeNode result = new TreeNode();
+            TreeNode rootNode = new TreeNode();
             try
             {
                 XmlReader reader = XmlReader.Create(filePath);
-                
+
                 while (reader.Read())
                 {
+                    
+                    if (reader.Name.Equals("projects") && (reader.NodeType != XmlNodeType.EndElement))
+                    {
+                        
+                        while (reader.Read() && !(reader.Name.Equals("projects") && (reader.NodeType == XmlNodeType.EndElement)))
+                        {
+                            if (reader.Name.Equals("project") && (reader.NodeType != XmlNodeType.EndElement))
+                            {
+                                TreeNode projectNode = new TreeNode(reader.GetAttribute("name"));
+                                rootNode.Nodes.Add(projectNode);
 
+
+                                while (reader.Read() && !(reader.Name.Equals("project") && (reader.NodeType == XmlNodeType.EndElement)) )
+                                {
+                                    if (reader.Name.Equals("job") && (reader.NodeType != XmlNodeType.EndElement))
+                                    {
+                                        TreeNode jobNode = new TreeNode(reader.GetAttribute("name"));
+                                        projectNode.Nodes.Add(jobNode);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                  
                 }
+
+                
+                
             }
             catch (System.IO.FileNotFoundException)
             {
+                Console.WriteLine("Exception in LoadProjectsFromFile.");
                 Console.WriteLine(filePath +" not found");
             }
             catch (XmlException ex)
@@ -80,7 +102,7 @@ namespace Pom_Pom
             {
                 Console.WriteLine("Something goes wrong. " + ex.Message);
             }
-            return result;
+            return rootNode;
 
         }
     

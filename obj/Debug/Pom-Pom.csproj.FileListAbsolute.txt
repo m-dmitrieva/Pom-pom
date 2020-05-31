@@ -1,10 +1,10 @@
 C:\Users\Марина\source\repos\Pom-Pom\bin\Debug\Pom-Pom.exe.config
 C:\Users\Марина\source\repos\Pom-Pom\bin\Debug\Pom-Pom.exe
 C:\Users\Марина\source\repos\Pom-Pom\bin\Debug\Pom-Pom.pdb
-C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom_Pom.NameForm.resources
 C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom_Pom.Properties.Resources.resources
 C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom-Pom.csproj.GenerateResource.cache
 C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom-Pom.csproj.CoreCompileInputs.cache
 C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom-Pom.exe
 C:\Users\Марина\source\repos\Pom-Pom\obj\Debug\Pom-Pom.pdb
 C:\Users\Марина\source\repos\Pom-pom\obj\Debug\Pom-Pom.csprojAssemblyReference.cache
+C:\Users\Марина\source\repos\Pom-pom\obj\Debug\Pom_Pom.MainForm.resources

@@ -4,9 +4,9 @@ using System.Windows.Forms;
 namespace Pom_Pom
 {
 
-    public partial class NameForm : Form
+    public partial class MainForm : Form
     {
-        public NameForm()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -14,7 +14,16 @@ namespace Pom_Pom
         private void NameForm_Load(object sender, EventArgs e)
         {
             //try to load jobs and tasks from previously setted file from config
-            XmlProcessing.LoadFromConfig();
+            string filePath = XmlProcessing.LoadFromConfig();
+            if (!filePath.Equals(String.Empty))
+            {
+                TreeNode NodesFromFile = XmlProcessing.LoadProjectsFromFile(filePath);
+                for (int i =0; i < NodesFromFile.Nodes.Count; i++)
+                {
+                    this.pomidorsFromList.Nodes.Add(NodesFromFile.Nodes[i]);
+                }
+                
+            }
             
         }
 
