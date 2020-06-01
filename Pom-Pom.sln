@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Class1.cs = Class1.cs
 		images\logo_1.ico = images\logo_1.ico
 		images\settings.jpg = images\settings.jpg
+		ToDos and Ideas.txt = ToDos and Ideas.txt
 	EndProjectSection
 EndProject
 Global
