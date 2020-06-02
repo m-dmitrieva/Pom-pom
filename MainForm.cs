@@ -6,16 +6,7 @@ namespace Pom_Pom
 
     public partial class MainForm : Form
     {
-        //values for working time, short break and long break
-        //initialy loads from AppConfig file
-        //by default values are 25, 5 and 20 minutes
-        internal int workTime = 25;
-        internal int shortBreak = 5;
-        internal int rest = 20;
-
-        private DateTime timeToStop = new DateTime();
-
-        States state = States.Work1;
+        
 
         public MainForm()
         {
@@ -26,9 +17,24 @@ namespace Pom_Pom
         {
             Console.Beep();
             timerTimer.Stop();
+            stopBtn.Enabled = false;
+            startBtn.Enabled = true;
+
             stageLabel.Text = "";
             timerLabel.Text = "00:00";
-            stopBtn.Enabled = false;
+
+            // loading next state for timer
+            int stateNumber = (int)state;
+            if ( stateNumber == statesLength-1)
+            {
+                stateNumber = 0;
+            }
+            else
+            {
+                stateNumber++;
+            }
+            state = (States)stateNumber;
+            
         }
 
         private void NameForm_Load(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace Pom_Pom
                 
             }
             // load value for timer
-            timerLabel.Text = "25:00";
+            timerLabel.Text = String.Format("{0,2:D2}:00", workTime); ;
             
         }
 
@@ -88,7 +94,7 @@ namespace Pom_Pom
             else
             {
                 TimeSpan diff = timeToStop - DateTime.Now;
-                timerLabel.Text = diff.Minutes.ToString() + ":" + diff.Seconds.ToString();
+                timerLabel.Text = String.Format("{0,2:D2}:{1,2:D2}", diff.Minutes, diff.Seconds);
             }
             
         }
@@ -120,6 +126,7 @@ namespace Pom_Pom
             Console.Beep();
             timerTimer.Start();
             stopBtn.Enabled = true;
+            startBtn.Enabled = false;
 
         }
 
