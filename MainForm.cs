@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime;
 using System.Windows.Forms;
 
 namespace Pom_Pom
@@ -39,20 +41,53 @@ namespace Pom_Pom
 
         private void NameForm_Load(object sender, EventArgs e)
         {
+            Dictionary<string, string> valuesFromConfig = XmlProcessing.LoadFromConfig();
+
             //try to load jobs and tasks from previously setted file from config
-            string filePath = XmlProcessing.LoadFromConfig();
-            if (!filePath.Equals(String.Empty))
+            try
             {
-                TreeNode NodesFromFile = XmlProcessing.LoadProjectsFromFile(filePath);
-                for (int i =0; i < NodesFromFile.Nodes.Count; i++)
+                string filePath;
+                valuesFromConfig.TryGetValue("filePath", out filePath);
+
+                if (!filePath.Equals(String.Empty))
                 {
-                    this.pomidorsFromList.Nodes.Add(NodesFromFile.Nodes[i]);
+                    TreeNode NodesFromFile = XmlProcessing.LoadProjectsFromFile(filePath);
+                    for (int i = 0; i < NodesFromFile.Nodes.Count; i++)
+                    {
+                        this.pomidorsFromList.Nodes.Add(NodesFromFile.Nodes[i]);
+                    }
+
                 }
                 
+            }catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Exception Appears! There is no filePath loaded from config" + ex.Message);
             }
-            // load value for timer
-            timerLabel.Text = String.Format("{0,2:D2}:00", workTime); ;
-            
+            try
+            {
+                //load values for timer
+                string temp;
+                valuesFromConfig.TryGetValue("work", out temp);
+
+                this.workTime = Int32.Parse(temp);
+                timerLabel.Text = String.Format("{0,2:D2}:00", workTime); ;
+
+                valuesFromConfig.TryGetValue("break", out temp);
+                this.shortBreak = Int32.Parse(temp);
+
+                valuesFromConfig.TryGetValue("rest", out temp);
+                this.rest = Int32.Parse(temp);
+            }
+            //catch exception from loading element from dictionary
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Loading time values crushed! " + ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Parse int from string failed! "+ex.Message);
+            }
+            // ToDo: вставить здесь обработку остальных ключей, извлеченных из appConfig
         }
 
         private void workOnItBtn_MouseClick(object sender, MouseEventArgs e)

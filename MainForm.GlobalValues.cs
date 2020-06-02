@@ -22,9 +22,9 @@ namespace Pom_Pom
         //values for working time, short break and long break
         //initialy loads from AppConfig file
         //by default values are 25, 5 and 20 minutes
-        internal int workTime = 25;
-        internal int shortBreak = 5;
-        internal int rest = 20;
+        internal int workTime = 30;
+        internal int shortBreak = 10;
+        internal int rest = 25;
 
         //variable to contain time when timer starts,
         //to evaluate when it should stop

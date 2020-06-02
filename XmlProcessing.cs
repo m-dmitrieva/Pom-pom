@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using System.Collections.Generic;
 
 namespace Pom_Pom
 {
@@ -11,9 +12,9 @@ namespace Pom_Pom
         {
         }
 
-        public static string LoadFromConfig()
+        public static Dictionary<string, string> LoadFromConfig()
         {
-            string filePath = null;
+            Dictionary<string, string> valuesFromConfig = new Dictionary<string, string>();
 
             //loading application config file for some initial settings           
             try
@@ -24,10 +25,28 @@ namespace Pom_Pom
                 {
                     //read filePath to load previously saved tasks and jobs
                     //and break loop
-                    if (reader.Name.Equals("tasksFilePath"))
+                    if (reader.Name.Equals("taskFilePath"))
                     {
-                        filePath = reader.ReadElementContentAsString();
-                        break;
+                        valuesFromConfig.Add("filePath", reader.ReadElementContentAsString());
+                        reader.ReadToNextSibling("timeIntervals");
+                    }
+                    if (reader.Name.Equals("timeIntervals"))
+                    {
+                        while (reader.Read() && !(reader.Name.Equals("timeIntervals") && reader.NodeType == XmlNodeType.EndElement))
+                        {
+                            if (reader.Name.Equals("work") && (reader.NodeType != XmlNodeType.EndElement))
+                            {
+                                valuesFromConfig.Add("work", reader.ReadElementContentAsString());
+                            }
+                            if (reader.Name.Equals("break") && (reader.NodeType != XmlNodeType.EndElement))
+                            {
+                                valuesFromConfig.Add("break", reader.ReadElementContentAsString());
+                            }
+                            if (reader.Name.Equals("rest") && (reader.NodeType != XmlNodeType.EndElement))
+                            {
+                                valuesFromConfig.Add("rest", reader.ReadElementContentAsString());
+                            }
+                        }
                     }
                 }
 
@@ -44,7 +63,7 @@ namespace Pom_Pom
             {
                 Console.WriteLine("Something goes wrong. " + ex.Message);
             }
-            return filePath;
+            return valuesFromConfig;
         }
         
         /**
