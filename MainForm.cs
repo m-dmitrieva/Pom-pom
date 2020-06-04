@@ -40,17 +40,28 @@ namespace Pom_Pom
             
         }
 
-        private void NameForm_Load(object sender, EventArgs e)
+        private void LoadTreeNodesFromSettings()
         {
-            //loading nodes for TreeView from previously choosen file
+            pomidorsFromList.BeginUpdate();
+            pomidorsFromList.Nodes.Clear();
+
             if (!Program.settings.filePath.Equals(String.Empty))
             {
-                for(int i =0; i<Program.settings.xmlTree.Nodes.Count; i++)
+                for (int i = 0; i < Program.settings.xmlTree.Nodes.Count; i++)
                 {
                     this.pomidorsFromList.Nodes.Add(Program.settings.xmlTree.Nodes[i]);
                 }
             }
 
+            //ToDo: удалить после отладки
+            Console.WriteLine("File reloaded");
+            pomidorsFromList.EndUpdate();
+        }
+
+        private void NameForm_Load(object sender, EventArgs e)
+        {
+
+            LoadTreeNodesFromSettings();
         }
 
         private void workOnItBtn_MouseClick(object sender, MouseEventArgs e)
@@ -133,9 +144,27 @@ namespace Pom_Pom
             this.myTimerStop();
         }
 
+
+        //Shows Settings Form
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            //ToDo: настроить отображение формы настроек при нажатии кнопки-шестеренки
+            SettingsForm settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK)
+            {
+                //ToDo: удалить после отладки
+                Console.WriteLine("Dialog Result OK");
+                if (Program.settings.filePathChaged)
+                {
+                    LoadTreeNodesFromSettings();
+                    Program.settings.filePathChaged = false;
+                }
+                
+            }
+            else
+            {
+                //there is nothing to change in main form
+                Console.WriteLine("Dialog Result Cancel");
+            }
         }
     }
 }

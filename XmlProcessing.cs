@@ -95,7 +95,7 @@ namespace Pom_Pom
                                 {
                                     if (reader.Name.Equals("job") && (reader.NodeType != XmlNodeType.EndElement))
                                     {
-                                        TreeNode jobNode = new TreeNode(reader.GetAttribute("name"));
+                                        TreeNode jobNode = new TreeNode(reader.ReadElementContentAsString());
                                         projectNode.Nodes.Add(jobNode);
                                     }
                                 }

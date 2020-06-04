@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<projects>
+	<project name="New_firstTestProject">
+		<job poms="10">firstTestJob</job>
+		<job poms="10">secondTestJob</job>
+		<job poms="10">thirdTestJob</job>
+		<job poms="10">fourthTestJob</job>
+	</project>
+	<project name="New_secondTestProject">
+		<job poms="10">firstTestJob</job>
+		<job poms="10">secondTestJob</job>
+		<job poms="10">thirdTestJob</job>
+		<job poms="10">fourthTestJob</job>
+	</project>
+	<project name="New_thirdTestProject">
+		<job poms="10">firstTestJob</job>
+		<job poms="10">secondTestJob</job>
+		<job poms="10">thirdTestJob</job>
+		<job poms="10">fourthTestJob</job>
+	</project>
+</projects>

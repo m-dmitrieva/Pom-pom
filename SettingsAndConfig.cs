@@ -14,6 +14,8 @@ namespace Pom_Pom
         internal int restTime { get; set; }
 
         internal string filePath { get; set; } = null;
+        internal bool filePathChaged = false;
+
 
         internal TreeNode xmlTree = null;
 
