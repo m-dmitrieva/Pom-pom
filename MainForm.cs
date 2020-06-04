@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pom_Pom.Properties;
+using System;
 using System.Collections.Generic;
 using System.Runtime;
 using System.Windows.Forms;
@@ -41,53 +42,15 @@ namespace Pom_Pom
 
         private void NameForm_Load(object sender, EventArgs e)
         {
-            Dictionary<string, string> valuesFromConfig = XmlProcessing.LoadFromConfig();
-
-            //try to load jobs and tasks from previously setted file from config
-            try
+            //loading nodes for TreeView from previously choosen file
+            if (!Program.settings.filePath.Equals(String.Empty))
             {
-                string filePath;
-                valuesFromConfig.TryGetValue("filePath", out filePath);
-
-                if (!filePath.Equals(String.Empty))
+                for(int i =0; i<Program.settings.xmlTree.Nodes.Count; i++)
                 {
-                    TreeNode NodesFromFile = XmlProcessing.LoadProjectsFromFile(filePath);
-                    for (int i = 0; i < NodesFromFile.Nodes.Count; i++)
-                    {
-                        this.pomidorsFromList.Nodes.Add(NodesFromFile.Nodes[i]);
-                    }
-
+                    this.pomidorsFromList.Nodes.Add(Program.settings.xmlTree.Nodes[i]);
                 }
-                
-            }catch (ArgumentNullException ex)
-            {
-                Console.WriteLine("Exception Appears! There is no filePath loaded from config" + ex.Message);
             }
-            try
-            {
-                //load values for timer
-                string temp;
-                valuesFromConfig.TryGetValue("work", out temp);
 
-                this.workTime = Int32.Parse(temp);
-                timerLabel.Text = String.Format("{0,2:D2}:00", workTime); ;
-
-                valuesFromConfig.TryGetValue("break", out temp);
-                this.shortBreak = Int32.Parse(temp);
-
-                valuesFromConfig.TryGetValue("rest", out temp);
-                this.rest = Int32.Parse(temp);
-            }
-            //catch exception from loading element from dictionary
-            catch (ArgumentNullException ex)
-            {
-                Console.WriteLine("Loading time values crushed! " + ex.Message);
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine("Parse int from string failed! "+ex.Message);
-            }
-            // ToDo: вставить здесь обработку остальных ключей, извлеченных из appConfig
         }
 
         private void workOnItBtn_MouseClick(object sender, MouseEventArgs e)
@@ -144,17 +107,17 @@ namespace Pom_Pom
                 case States.Work2:
                 case States.Work3:
                 case States.Work4:
-                    timeToStop = currentTime.AddMinutes(workTime);
+                    timeToStop = currentTime.AddMinutes(Program.settings.workTime);
                     stageLabel.Text = "Time to work!";
                     break;
                 case States.Break1:
                 case States.Break2:
                 case States.Break3:
-                    timeToStop = currentTime.AddMinutes(shortBreak);
+                    timeToStop = currentTime.AddMinutes(Program.settings.breakTime);
                     stageLabel.Text = "Take a break!";
                     break;
                 case States.Rest:
-                    timeToStop = currentTime.AddMinutes(rest);
+                    timeToStop = currentTime.AddMinutes(Program.settings.restTime);
                     stageLabel.Text = "Give youself a rest";
                     break;
             }
@@ -168,6 +131,11 @@ namespace Pom_Pom
         private void stopBtn_Click(object sender, EventArgs e)
         {
             this.myTimerStop();
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            //ToDo: настроить отображение формы настроек при нажатии кнопки-шестеренки
         }
     }
 }

@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F93D85CA-037F-4093-903C-353A6212964B}"
 	ProjectSection(SolutionItems) = preProject
 		appConfig.xml = appConfig.xml
-		Class1.cs = Class1.cs
 		images\logo_1.ico = images\logo_1.ico
 		images\settings.jpg = images\settings.jpg
 		ToDos and Ideas.txt = ToDos and Ideas.txt

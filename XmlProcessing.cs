@@ -12,7 +12,7 @@ namespace Pom_Pom
         {
         }
 
-        public static Dictionary<string, string> LoadFromConfig()
+        public static Dictionary<string, string> LoadValuesFromConfig()
         {
             Dictionary<string, string> valuesFromConfig = new Dictionary<string, string>();
 

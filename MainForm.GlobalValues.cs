@@ -19,12 +19,8 @@ namespace Pom_Pom
             Rest
         }
 
-        //values for working time, short break and long break
-        //initialy loads from AppConfig file
-        //by default values are 25, 5 and 20 minutes
-        internal int workTime = 30;
-        internal int shortBreak = 10;
-        internal int rest = 25;
+        //file for saving path to projects file
+//        internal string filePath;
 
         //variable to contain time when timer starts,
         //to evaluate when it should stop
@@ -33,8 +29,8 @@ namespace Pom_Pom
         States state = States.Work1;
 
         //get quantity of States
-        //becouse of some reasons in future in may change
-        //and it will be wise to chect it at every load
+        //because of some reasons in future it may change
+        //and it will be wise to check it at every load
         int statesLength = Enum.GetValues(typeof(States)).Length;
     }
 }

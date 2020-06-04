@@ -18,3 +18,4 @@ C:\Users\Марина\source\repos\m-dmitrieva\Pom-pom\obj\Debug\Pom-Pom.csproj.
 C:\Users\Марина\source\repos\m-dmitrieva\Pom-pom\obj\Debug\Pom-Pom.csproj.CoreCompileInputs.cache
 C:\Users\Марина\source\repos\m-dmitrieva\Pom-pom\obj\Debug\Pom-Pom.exe
 C:\Users\Марина\source\repos\m-dmitrieva\Pom-pom\obj\Debug\Pom-Pom.pdb
+C:\Users\Марина\source\repos\m-dmitrieva\Pom-pom\obj\Debug\Pom_Pom.SettingsForm.resources
