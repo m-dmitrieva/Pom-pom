@@ -125,5 +125,34 @@ namespace Pom_Pom
 
         }
     
+        public static void SaveConfigToFile()
+        {
+            XmlWriterSettings xmlWriterSetings = new XmlWriterSettings();
+            xmlWriterSetings.Indent = true; // отступы  для элементов
+            xmlWriterSetings.IndentChars = "\t";
+
+            XmlWriter writer = XmlWriter.Create("appConfig.xml", xmlWriterSetings);
+
+            //write header <?xml...>
+            writer.WriteStartDocument(true);
+
+            writer.WriteStartElement("settings");
+
+            writer.WriteElementString("taskFilePath", Program.settings.filePath);
+
+            writer.WriteStartElement("timeIntervals");
+            writer.WriteElementString("work", Program.settings.workTime.ToString());
+            writer.WriteElementString("break", Program.settings.breakTime.ToString());
+            writer.WriteElementString("rest", Program.settings.restTime.ToString());
+
+
+            writer.WriteFullEndElement();
+            writer.WriteEndElement();
+            //close writer to write content to the file and save changes
+            writer.Close();
+
+
+            
+        }
     }
 }

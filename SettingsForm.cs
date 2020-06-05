@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pom_Pom.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Pom_Pom
 {
@@ -63,8 +65,9 @@ namespace Pom_Pom
                 Program.settings.filePathChaged = true;
                 Program.settings.xmlTree = XmlProcessing.LoadProjectsFromFile(Program.settings.filePath);
             }
-            
 
+            
+            XmlProcessing.SaveConfigToFile();
 
         }
     }
