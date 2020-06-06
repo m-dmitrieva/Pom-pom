@@ -19,8 +19,14 @@ namespace Pom_Pom
             Rest
         }
 
+        private int totalWorkPeriods = 0;
+        private int stoppedWorkPeriods = 0;
+        private int totalBreakPeriods = 0;
+        private int totalRestPeriods = 0;
+
+
         //file for saving path to projects file
-//        internal string filePath;
+        //        internal string filePath;
 
         //variable to contain time when timer starts,
         //to evaluate when it should stop

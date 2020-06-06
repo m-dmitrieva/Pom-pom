@@ -16,6 +16,9 @@ namespace Pom_Pom
         internal string filePath { get; set; } = null;
         internal bool filePathChaged = false;
 
+        
+
+
 
         internal TreeNode xmlTree = null;
 

@@ -26,6 +26,32 @@ namespace Pom_Pom
             stageLabel.Text = "";
             timerLabel.Text = "00:00";
 
+            switch (state){
+                case States.Work1:
+                case States.Work2:
+                case States.Work3:
+                case States.Work4:
+                    this.totalWorkPeriods++;
+                    break;
+
+                case States.Break1:
+                case States.Break2:
+                case States.Break3:
+                    this.totalBreakPeriods++;
+                    break;
+                case States.Rest:
+                    this.totalRestPeriods++;
+                    break;
+
+            }
+
+            //refresh day review
+            workPeriodsValueLabel.Text = totalWorkPeriods.ToString();
+            stoppenWorkPeriodsValueLabel.Text = stoppedWorkPeriods.ToString();
+            breakPeriodsValueLabel.Text = totalBreakPeriods.ToString();
+            restPeriodsValueLabel.Text = totalRestPeriods.ToString();
+
+
             // loading next state for timer
             int stateNumber = (int)state;
             if ( stateNumber == statesLength-1)
@@ -53,8 +79,6 @@ namespace Pom_Pom
                 }
             }
 
-            //ToDo: удалить после отладки
-            Console.WriteLine("File reloaded");
             pomidorsFromList.EndUpdate();
         }
 
@@ -141,6 +165,15 @@ namespace Pom_Pom
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
+            switch (state)
+            {
+                case States.Work1:
+                case States.Work2:
+                case States.Work3:
+                case States.Work4:
+                    this.stoppedWorkPeriods++;
+                    break;
+            }
             this.myTimerStop();
         }
 
