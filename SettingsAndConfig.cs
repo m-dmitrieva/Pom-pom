@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,42 @@ using System.Windows.Forms;
 
 namespace Pom_Pom
 {
+    public struct Job
+    {
+        public string name;
+        public int poms;
+
+        public Job(string name)
+        {
+            this.name = name;
+            this.poms = 0;
+        }
+        public Job(string name, int poms)
+        {
+            this.name = name;
+            this.poms = poms;
+        }
+
+    }
+
+    public struct Project
+    {
+        public string name;
+        public int totalPoms;
+        public List<Job> jobs;
+
+        public Project(string name)
+        {
+            this.name = name;
+            this.totalPoms = 0;
+            this.jobs = new List<Job>();
+        }
+
+        public void Add(Job job)
+        {
+            this.jobs.Add(job);
+        }
+    }
     class SettingsAndConfig
     {
         internal int workTime { get; set; }
@@ -16,16 +53,21 @@ namespace Pom_Pom
         internal string filePath { get; set; } = null;
         internal bool filePathChaged = false;
 
+        public List<Project> projects = null;
         
-
-
-
         internal TreeNode xmlTree = null;
 
         public SettingsAndConfig()
         {
             parseDictionary(XmlProcessing.LoadValuesFromConfig());
-            xmlTree = XmlProcessing.LoadProjectsFromFile(filePath);
+            // xmlTree = XmlProcessing.LoadProjectsFromFile(filePath);
+            LoadDataFromFile(filePath);
+        }
+
+        public void LoadDataFromFile(string filePath)
+        {
+            this.projects = XmlProcessing.LoadProjectsFromFile(filePath);
+            this.xmlTree = ProjectsToTree(this.projects);
         }
 
         private void parseDictionary(Dictionary<string, string> settings)
@@ -56,6 +98,27 @@ namespace Pom_Pom
                 Console.WriteLine("Loading values from config crushed! " + ex.Message);
                 Console.WriteLine("Setted default values!");
             }
+
+        }
+
+        public TreeNode ProjectsToTree(List<Project> projects)
+        {
+            TreeNode rootNode = new TreeNode();
+
+            foreach (Project curProject in projects)
+            {
+                TreeNode projectNode = new TreeNode(curProject.name);
+                rootNode.Nodes.Add(projectNode);
+
+                foreach(Job curJob in curProject.jobs)
+                {
+                    TreeNode jobNode = new TreeNode(curJob.name);
+                    projectNode.Nodes.Add(jobNode);
+                }
+
+            }
+
+            return rootNode;
 
         }
     }

@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using System.Collections.Generic;
+using System.CodeDom.Compiler;
 
 namespace Pom_Pom
 {
@@ -70,9 +71,10 @@ namespace Pom_Pom
          * gets path to XML-file with pojects
          * returns parsed into TreeNode XML
          * */
-        public static TreeNode LoadProjectsFromFile(string filePath)
+        public static List<Project> LoadProjectsFromFile(string filePath)
         {
             TreeNode rootNode = new TreeNode();
+            List<Project> projectsList = new List<Project>();
             try
             {
                 XmlReader reader = XmlReader.Create(filePath);
@@ -90,15 +92,36 @@ namespace Pom_Pom
                                 TreeNode projectNode = new TreeNode(reader.GetAttribute("name"));
                                 rootNode.Nodes.Add(projectNode);
 
+                                int totalPoms = 0;
+
+                                Project project = new Project(projectNode.Text);
+                                
 
                                 while (reader.Read() && !(reader.Name.Equals("project") && (reader.NodeType == XmlNodeType.EndElement)) )
                                 {
                                     if (reader.Name.Equals("job") && (reader.NodeType != XmlNodeType.EndElement))
                                     {
+                                        int poms = 0;
+                                        try
+                                        {
+                                            poms = int.Parse(reader.GetAttribute("poms"));
+                                        }catch (Exception ex)
+                                        {
+                                            Console.WriteLine("Error parsing poms attribute. Message: " + ex.Message);
+                                            poms = 0;
+                                        }
                                         TreeNode jobNode = new TreeNode(reader.ReadElementContentAsString());
                                         projectNode.Nodes.Add(jobNode);
+
+                                        Job job = new Job(jobNode.Text, poms);
+                                        
+                                        totalPoms += poms;
+                                        project.Add(job);
                                     }
                                 }
+                                project.totalPoms = totalPoms;
+                                projectsList.Add(project);
+                                
                             }
                         }
                     }
@@ -121,7 +144,8 @@ namespace Pom_Pom
             {
                 Console.WriteLine("Something goes wrong. " + ex.Message);
             }
-            return rootNode;
+            return projectsList;
+            //return rootNode;
 
         }
     

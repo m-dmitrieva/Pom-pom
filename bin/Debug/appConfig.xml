@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<taskFilePath>C:\Users\Марина\Desktop\TasksAndJobs.xml</taskFilePath>
+	<taskFilePath>C:\Users\Марина\source\repos\Pom-pom\TasksAndJobs.xml</taskFilePath>
 	<timeIntervals>
 		<work>25</work>
 		<break>5</break>

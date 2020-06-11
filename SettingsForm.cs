@@ -41,12 +41,7 @@ namespace Pom_Pom
             chooseProjectFileDlg.Filter = "Xml-files (*.xml)|*.xml|All files (*.*)|*.*";
             if (chooseProjectFileDlg.ShowDialog() == DialogResult.OK)
             {
-                this.filePathTextBox.Text = chooseProjectFileDlg.FileName;
-
-                Program.settings.filePath = chooseProjectFileDlg.FileName;
-                Program.settings.filePathChaged = true;
-                Program.settings.xmlTree = XmlProcessing.LoadProjectsFromFile(Program.settings.filePath);
-
+                 this.filePathTextBox.Text = chooseProjectFileDlg.FileName;
             }
             
         }
@@ -59,11 +54,18 @@ namespace Pom_Pom
             Program.settings.restTime = (int)this.restTimeInput.Value;
 
             if (!Program.settings.filePath.Equals(this.filePathTextBox.Text))
-            {
-                Program.settings.filePath = this.filePathTextBox.Text;
-                Program.settings.xmlTree = XmlProcessing.LoadProjectsFromFile(Program.settings.filePath);
+            {  
+                if ( (this.filePathTextBox.Text != null) && !this.filePathTextBox.Text.Equals(String.Empty))
+                {
+                    Program.settings.filePath = this.filePathTextBox.Text;
+                }
+
+                Program.settings.LoadDataFromFile(Program.settings.filePath);
+                
                 Program.settings.filePathChaged = true;
-                Program.settings.xmlTree = XmlProcessing.LoadProjectsFromFile(Program.settings.filePath);
+                
+                
+                
             }
 
             

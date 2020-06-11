@@ -2,21 +2,21 @@
 <projects>
 	<project name="firstTestProject">
 		<job poms="10">firstTestJob</job>
-		<job poms="10">secondTestJob</job>
-		<job poms="10">thirdTestJob</job>
-		<job poms="10">fourthTestJob</job>
+		<job poms="20">secondTestJob</job>
+		<job poms="30">thirdTestJob</job>
+		<job poms="40">fourthTestJob</job>
 	</project>
 	<project name="secondTestProject">
-		<job poms="10">firstTestJob</job>
-		<job poms="10">secondTestJob</job>
-		<job poms="10">thirdTestJob</job>
-		<job poms="10">fourthTestJob</job>
+		<job poms="50">firstTestJob</job>
+		<job poms="60">secondTestJob</job>
+		<job poms="70">thirdTestJob</job>
+		<job poms="80">fourthTestJob</job>
 	</project>
 	<project name="thirdTestProject">
-		<job poms="10">firstTestJob</job>
-		<job poms="10">secondTestJob</job>
-		<job poms="10">thirdTestJob</job>
-		<job poms="10">fourthTestJob</job>
+		<job poms="90">firstTestJob</job>
+		<job poms="100">secondTestJob</job>
+		<job poms="110">thirdTestJob</job>
+		<job poms="120">fourthTestJob</job>
 	</project>
 	
 </projects>

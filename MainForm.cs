@@ -1,6 +1,7 @@
 ﻿using Pom_Pom.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime;
 using System.Windows.Forms;
 
@@ -184,8 +185,6 @@ namespace Pom_Pom
             SettingsForm settingsForm = new SettingsForm();
             if (settingsForm.ShowDialog() == DialogResult.OK)
             {
-                //ToDo: удалить после отладки
-                Console.WriteLine("Dialog Result OK");
                 if (Program.settings.filePathChaged)
                 {
                     LoadTreeNodesFromSettings();
@@ -193,10 +192,67 @@ namespace Pom_Pom
                 }
                 
             }
-            else
+        }
+
+        private void pomidorsFromList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            bool isProject = (e.Node.Parent == null);
+            int nodeIndex = e.Node.Index;
+
+            //choosen project
+            if (isProject)
             {
-                //there is nothing to change in main form
-                Console.WriteLine("Dialog Result Cancel");
+                //set availible
+                addProjectBtn.Enabled = true;
+                addJobBtn.Enabled = true;
+                deleteProjectBtn.Enabled = true;
+
+                //set unavailible buttons
+                deleteJobBtn.Enabled = false;
+                workOnItBtn.Enabled = false;
+
+                //set values for "Project/Job review"
+                jobReviewGroupBox.Text = "Project review";
+
+                projectNameLabel.Visible = true;
+                projectNameValueLabel.Visible = true;
+                projectNameValueLabel.Text = e.Node.Text;
+
+                jobNameLabel.Visible = false;
+                jobNameValueLabel.Visible = false;
+
+                pomodorosLabel.Visible = true;
+                pomodorosValueLabel.Text = Program.settings.projects[nodeIndex].totalPoms.ToString();
+                pomodorosValueLabel.Visible = true;
+
+                
+            }
+            //choosen job
+            else {
+                //set availible/unavailible buttons
+                addJobBtn.Enabled = true;
+                deleteJobBtn.Enabled = true;
+                workOnItBtn.Enabled = true;
+
+                //set unavailible buttons
+                addProjectBtn.Enabled = false;
+                deleteProjectBtn.Enabled = false;
+
+                //set values for "Job review"
+                jobReviewGroupBox.Text = "Job review";
+
+                projectNameLabel.Visible = true;
+                projectNameValueLabel.Visible = true;
+                projectNameValueLabel.Text = e.Node.Parent.Text;
+
+                jobNameLabel.Visible = true;
+                jobNameValueLabel.Visible = true;
+                jobNameValueLabel.Text = e.Node.Text;
+
+                pomodorosLabel.Visible = true;
+                pomodorosValueLabel.Text = Program.settings.projects[e.Node.Parent.Index].jobs[nodeIndex].poms.ToString();
+                pomodorosValueLabel.Visible = true;
+
             }
         }
     }
