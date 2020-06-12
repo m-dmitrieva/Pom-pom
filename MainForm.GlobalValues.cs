@@ -24,6 +24,7 @@ namespace Pom_Pom
         private int totalBreakPeriods = 0;
         private int totalRestPeriods = 0;
 
+        internal System.Windows.Forms.TreeNode selectedNode = null;
 
         //file for saving path to projects file
         //        internal string filePath;

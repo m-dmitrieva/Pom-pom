@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace Pom_Pom
 {
@@ -97,26 +98,52 @@ namespace Pom_Pom
 
         private void addNodeBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Заглушка");
-            /*ToDo: Реализовать добавление узла задачи в выделенный проект*/
+            string newItemName = null;
+
+            //add job node in selected project в TreeView
+            if (InputBox.Show("Add job", "Please, enter job name", ref newItemName) == DialogResult.OK)
+            {
+                Job newJob = new Job(newItemName, 0);
+                Program.settings.projects[this.selectedNode.Index].Add(newJob);
+                this.pomidorsFromList.Nodes[this.selectedNode.Index].Nodes.Add(new TreeNode(newItemName));
+            }
+
+            
+
         }
 
         private void deleteNodeBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Заглушка");
-            /*ToDo: реализовать удаление выбранного узла задачи*/
+            if (MessageBox.Show("Delete job " + this.selectedNode.Text+"?", 
+                                    "Are you sure?", 
+                                    MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Program.settings.projects[this.selectedNode.Parent.Index].jobs.RemoveAt(this.selectedNode.Index);
+                this.pomidorsFromList.Nodes[this.selectedNode.Parent.Index].Nodes.RemoveAt(this.selectedNode.Index);
+            }
         }
 
         private void addProjectBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Заглушка");
-            /*ToDO: реализовать добавление проекта в дерево*/
+            string newItemName = null;
+            //add new project
+            if (InputBox.Show("Add project", "Please, enter project name", ref newItemName) == DialogResult.OK)
+            {
+                Project newProject = new Project(newItemName);
+                Program.settings.projects.Add(newProject);
+                this.pomidorsFromList.Nodes.Add(new TreeNode(newItemName));
+            }
         }
 
         private void deleteProjectBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Заглушка");
-            /*ToDo: реализовать удаление узла проекта из дерева*/
+            if (MessageBox.Show("Delete project " + this.selectedNode.Text + "?", 
+                                    "Are you sure?", 
+                                    MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Program.settings.projects.RemoveAt(this.selectedNode.Index);
+                this.pomidorsFromList.Nodes.RemoveAt(this.selectedNode.Index);
+            }
         }
 
         private void timerTimer_Tick(object sender, EventArgs e)
@@ -197,7 +224,10 @@ namespace Pom_Pom
         private void pomidorsFromList_AfterSelect(object sender, TreeViewEventArgs e)
         {
             bool isProject = (e.Node.Parent == null);
+            
             int nodeIndex = e.Node.Index;
+            //save link to selected node
+            this.selectedNode = e.Node;
 
             //choosen project
             if (isProject)
@@ -225,12 +255,11 @@ namespace Pom_Pom
                 pomodorosValueLabel.Text = Program.settings.projects[nodeIndex].totalPoms.ToString();
                 pomodorosValueLabel.Visible = true;
 
-                
             }
             //choosen job
             else {
                 //set availible/unavailible buttons
-                addJobBtn.Enabled = true;
+                addJobBtn.Enabled = false;
                 deleteJobBtn.Enabled = true;
                 workOnItBtn.Enabled = true;
 
@@ -254,6 +283,13 @@ namespace Pom_Pom
                 pomodorosValueLabel.Visible = true;
 
             }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            //ToDo: добавить обработку ошибок. Начать здесь
+            XmlProcessing.SaveProjectsToFile(Program.settings.filePath);
+            MessageBox.Show("Data saved to "+ Program.settings.filePath);
         }
     }
 }

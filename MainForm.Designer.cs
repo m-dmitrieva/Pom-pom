@@ -60,6 +60,7 @@
             this.addJobBtn = new System.Windows.Forms.Button();
             this.pomidorsFromList = new System.Windows.Forms.TreeView();
             this.timerTimer = new System.Windows.Forms.Timer(this.components);
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitForPannels)).BeginInit();
             this.splitForPannels.Panel1.SuspendLayout();
             this.splitForPannels.Panel2.SuspendLayout();
@@ -328,6 +329,7 @@
             // 
             // buttonsPanel
             // 
+            this.buttonsPanel.Controls.Add(this.saveButton);
             this.buttonsPanel.Controls.Add(this.deleteProjectBtn);
             this.buttonsPanel.Controls.Add(this.addProjectBtn);
             this.buttonsPanel.Controls.Add(this.workOnItBtn);
@@ -341,7 +343,7 @@
             // deleteProjectBtn
             // 
             this.deleteProjectBtn.Enabled = false;
-            this.deleteProjectBtn.Location = new System.Drawing.Point(269, 35);
+            this.deleteProjectBtn.Location = new System.Drawing.Point(183, 35);
             this.deleteProjectBtn.Name = "deleteProjectBtn";
             this.deleteProjectBtn.Size = new System.Drawing.Size(85, 29);
             this.deleteProjectBtn.TabIndex = 4;
@@ -352,7 +354,7 @@
             // addProjectBtn
             // 
             this.addProjectBtn.Enabled = false;
-            this.addProjectBtn.Location = new System.Drawing.Point(269, 3);
+            this.addProjectBtn.Location = new System.Drawing.Point(183, 3);
             this.addProjectBtn.Name = "addProjectBtn";
             this.addProjectBtn.Size = new System.Drawing.Size(85, 29);
             this.addProjectBtn.TabIndex = 3;
@@ -363,7 +365,7 @@
             // workOnItBtn
             // 
             this.workOnItBtn.Enabled = false;
-            this.workOnItBtn.Location = new System.Drawing.Point(0, 4);
+            this.workOnItBtn.Location = new System.Drawing.Point(3, 3);
             this.workOnItBtn.Name = "workOnItBtn";
             this.workOnItBtn.Size = new System.Drawing.Size(75, 29);
             this.workOnItBtn.TabIndex = 2;
@@ -374,7 +376,7 @@
             // deleteJobBtn
             // 
             this.deleteJobBtn.Enabled = false;
-            this.deleteJobBtn.Location = new System.Drawing.Point(136, 35);
+            this.deleteJobBtn.Location = new System.Drawing.Point(89, 34);
             this.deleteJobBtn.Name = "deleteJobBtn";
             this.deleteJobBtn.Size = new System.Drawing.Size(85, 29);
             this.deleteJobBtn.TabIndex = 1;
@@ -385,7 +387,7 @@
             // addJobBtn
             // 
             this.addJobBtn.Enabled = false;
-            this.addJobBtn.Location = new System.Drawing.Point(136, 4);
+            this.addJobBtn.Location = new System.Drawing.Point(89, 3);
             this.addJobBtn.Name = "addJobBtn";
             this.addJobBtn.Size = new System.Drawing.Size(85, 29);
             this.addJobBtn.TabIndex = 0;
@@ -405,6 +407,16 @@
             // 
             this.timerTimer.Interval = 1000;
             this.timerTimer.Tick += new System.EventHandler(this.timerTimer_Tick);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(279, 3);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 29);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "Save work";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // MainForm
             // 
@@ -462,6 +474,7 @@
         private System.Windows.Forms.Label projectNameValueLabel;
         private System.Windows.Forms.Label jobNameValueLabel;
         private System.Windows.Forms.Label pomodorosValueLabel;
+        private System.Windows.Forms.Button saveButton;
     }
 }
 

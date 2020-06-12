@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <projects>
 	<project name="firstTestProject">
 		<job poms="10">firstTestJob</job>
@@ -8,15 +8,6 @@
 	</project>
 	<project name="secondTestProject">
 		<job poms="50">firstTestJob</job>
-		<job poms="60">secondTestJob</job>
 		<job poms="70">thirdTestJob</job>
-		<job poms="80">fourthTestJob</job>
 	</project>
-	<project name="thirdTestProject">
-		<job poms="90">firstTestJob</job>
-		<job poms="100">secondTestJob</job>
-		<job poms="110">thirdTestJob</job>
-		<job poms="120">fourthTestJob</job>
-	</project>
-	
 </projects>

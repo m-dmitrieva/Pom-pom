@@ -175,8 +175,39 @@ namespace Pom_Pom
             //close writer to write content to the file and save changes
             writer.Close();
 
+        }
 
+        public static void SaveProjectsToFile(string filePath)
+        {
+            XmlWriterSettings xmlWriterSetings = new XmlWriterSettings();
+            xmlWriterSetings.Indent = true; // отступы  для элементов
+            xmlWriterSetings.IndentChars = "\t";
+
+            XmlWriter writer = XmlWriter.Create(filePath, xmlWriterSetings);
+
+            writer.WriteStartDocument(true);
+
+            writer.WriteStartElement("projects");
+            foreach (Project curProject in Program.settings.projects)
+            {
+                writer.WriteStartElement("project");
+                writer.WriteAttributeString("name", curProject.name);
+                foreach (Job curJob in curProject.jobs)
+                {
+                    writer.WriteStartElement("job");
+                    writer.WriteAttributeString("poms", curJob.poms.ToString());
+                    writer.WriteString(curJob.name);
+                    writer.WriteEndElement();
+                }
+
+                writer.WriteEndElement();
+            }
             
+
+            //writer.WriteFullEndElement();
+            writer.WriteEndElement();
+            //close writer to write content to the file and save changes
+            writer.Close();
         }
     }
 }
