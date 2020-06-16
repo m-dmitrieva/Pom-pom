@@ -44,6 +44,7 @@ namespace Pom_Pom
             this.jobs.Add(job);
         }
     }
+  
     class SettingsAndConfig
     {
         internal int workTime { get; set; }
@@ -54,20 +55,17 @@ namespace Pom_Pom
         internal bool filePathChaged = false;
 
         public List<Project> projects = null;
-        
-        internal TreeNode xmlTree = null;
 
         public SettingsAndConfig()
         {
             parseDictionary(XmlProcessing.LoadValuesFromConfig());
-            // xmlTree = XmlProcessing.LoadProjectsFromFile(filePath);
             LoadDataFromFile(filePath);
         }
 
         public void LoadDataFromFile(string filePath)
         {
             this.projects = XmlProcessing.LoadProjectsFromFile(filePath);
-            this.xmlTree = ProjectsToTree(this.projects);
+            //this.xmlTree = ProjectsToTree(this.projects);
         }
 
         private void parseDictionary(Dictionary<string, string> settings)
@@ -101,26 +99,6 @@ namespace Pom_Pom
 
         }
 
-        public TreeNode ProjectsToTree(List<Project> projects)
-        {
-            TreeNode rootNode = new TreeNode();
-
-            foreach (Project curProject in projects)
-            {
-                TreeNode projectNode = new TreeNode(curProject.name);
-                rootNode.Nodes.Add(projectNode);
-
-                foreach(Job curJob in curProject.jobs)
-                {
-                    TreeNode jobNode = new TreeNode(curJob.name);
-                    projectNode.Nodes.Add(jobNode);
-                }
-
-            }
-
-            return rootNode;
-
-        }
     }
 
 }

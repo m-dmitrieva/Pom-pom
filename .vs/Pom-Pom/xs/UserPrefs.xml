@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{ABE75760-B4AF-439C-BFD4-23BFF4B9FEE7}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SettingsAndConfig.cs">
+    <Files>
+      <File FileName="XmlProcessing.cs" Line="16" Column="59" />
+      <File FileName="MainForm.cs" Line="77" Column="14" />
+      <File FileName="SettingsAndConfig.cs" Line="48" Column="4" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Pom-Pom" expanded="True">
+            <Node name="Pom-Pom" expanded="True">
+              <Node name="MainForm.cs" expanded="True" />
+              <Node name="SettingsAndConfig.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Pom-Pom PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

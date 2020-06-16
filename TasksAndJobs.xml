@@ -6,8 +6,4 @@
 		<job poms="30">thirdTestJob</job>
 		<job poms="40">fourthTestJob</job>
 	</project>
-	<project name="secondTestProject">
-		<job poms="50">firstTestJob</job>
-		<job poms="70">thirdTestJob</job>
-	</project>
 </projects>

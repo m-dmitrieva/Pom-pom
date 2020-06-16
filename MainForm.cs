@@ -75,9 +75,14 @@ namespace Pom_Pom
 
             if (!Program.settings.filePath.Equals(String.Empty))
             {
-                for (int i = 0; i < Program.settings.xmlTree.Nodes.Count; i++)
+                foreach (Project curProject in Program.settings.projects)
                 {
-                    this.pomidorsFromList.Nodes.Add(Program.settings.xmlTree.Nodes[i]);
+                    TreeNode projNode = new TreeNode(curProject.name);
+                    foreach (Job curJob in curProject.jobs)
+                    {
+                        projNode.Nodes.Add(new TreeNode(curJob.name));
+                    }
+                    pomidorsFromList.Nodes.Add(projNode);
                 }
             }
 

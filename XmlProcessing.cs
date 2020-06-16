@@ -12,7 +12,9 @@ namespace Pom_Pom
         public XmlProcessing()
         {
         }
-
+        /*
+         *create dictionary of settings from appConfig.xml
+         */
         public static Dictionary<string, string> LoadValuesFromConfig()
         {
             Dictionary<string, string> valuesFromConfig = new Dictionary<string, string>();
@@ -50,6 +52,7 @@ namespace Pom_Pom
                         }
                     }
                 }
+                reader.Close();
 
             }
             catch (System.IO.FileNotFoundException)
@@ -127,7 +130,7 @@ namespace Pom_Pom
                     }
                   
                 }
-
+                reader.Close();
                 
                 
             }
